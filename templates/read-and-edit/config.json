@@ -1,0 +1,16 @@
+{
+  "appName": "My App",
+  "version": "1.0.0",
+  "port": 3000,
+  "debug": false,
+  "database": {
+    "host": "localhost",
+    "port": 5432,
+    "name": "myapp_db"
+  },
+  "features": {
+    "darkMode": true,
+    "notifications": false,
+    "maxUploadSize": "10MB"
+  }
+}

@@ -1,0 +1,16 @@
+date,product,category,amount,quantity
+2024-01-05,Widget A,Electronics,15000,3
+2024-01-12,Widget B,Electronics,8500,1
+2024-01-18,Gadget X,Home,3200,5
+2024-02-03,Widget A,Electronics,15000,3
+2024-02-14,Service Plan,Services,25000,1
+2024-02-20,Gadget Y,Home,4800,2
+2024-03-01,Widget B,Electronics,17000,2
+2024-03-10,Gadget X,Home,6400,10
+2024-03-22,Service Plan,Services,25000,1
+2024-04-05,Widget A,Electronics,30000,6
+2024-04-15,Gadget Z,Home,12000,4
+2024-04-28,Service Plan,Services,50000,2
+2024-05-10,Widget C,Electronics,22000,4
+2024-05-20,Gadget X,Home,9600,15
+2024-06-01,Service Plan,Services,25000,1
