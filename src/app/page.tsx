@@ -100,6 +100,15 @@ export default function Home() {
     setActiveLessonId(null);
   };
 
+  const handleJumpToLesson = (courseId: string, lessonId: string) => {
+    setActiveCourseId(courseId);
+    setActiveLessonId(lessonId);
+    setCurrentStepIndex(0);
+    setPreviewFile(null);
+    setFileTree([]);
+    setVerifyFailed(false);
+  };
+
   const handleSelectLesson = (lessonId: string) => {
     setActiveLessonId(lessonId);
     setCurrentStepIndex(0);
@@ -215,6 +224,7 @@ export default function Home() {
         <CourseSelect
           courses={courses}
           onSelect={handleSelectCourse}
+          onJumpToLesson={handleJumpToLesson}
           completedCounts={courseCompletedCounts}
         />
       </div>

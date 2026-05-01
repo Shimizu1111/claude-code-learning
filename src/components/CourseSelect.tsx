@@ -256,13 +256,16 @@ const colorMap: Record<string, { bg: string; border: string; text: string; iconB
 export default function CourseSelect({
   courses,
   onSelect,
+  onJumpToLesson,
   completedCounts,
 }: {
   courses: Course[];
   onSelect: (courseId: string) => void;
+  onJumpToLesson: (courseId: string, lessonId: string) => void;
   completedCounts: Record<string, { done: number; total: number }>;
 }) {
   const [showGuide, setShowGuide] = useState(true);
+  const [showAllLessons, setShowAllLessons] = useState(false);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-full py-12 px-6">
@@ -333,6 +336,60 @@ export default function CourseSelect({
             </button>
           );
         })}
+      </div>
+
+      {/* All lessons index */}
+      <div className="max-w-3xl w-full mt-10">
+        <button
+          onClick={() => setShowAllLessons(!showAllLessons)}
+          className="flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary transition-colors mb-4"
+        >
+          <svg
+            className={`w-4 h-4 transition-transform ${showAllLessons ? "rotate-90" : ""}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+          特定のレッスンだけ見たい方はこちら（全レッスン一覧）
+        </button>
+
+        {showAllLessons && (
+          <div className="space-y-6">
+            {courses.map((course) => {
+              const colors = colorMap[course.color] || colorMap.green;
+              return (
+                <div key={course.id}>
+                  <h3 className={`text-sm font-semibold mb-2 ${colors.text}`}>
+                    {course.title} - {course.subtitle}
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {course.lessons.map((lesson) => (
+                      <button
+                        key={lesson.id}
+                        onClick={() => onJumpToLesson(course.id, lesson.id)}
+                        className="text-left p-3 rounded-lg border border-border-main bg-bg-card hover:border-accent/50 transition-colors"
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="min-w-0">
+                            <p className="text-sm font-medium truncate">{lesson.title}</p>
+                            <p className="text-xs text-text-secondary mt-0.5">
+                              {lesson.category} / ~{lesson.estimatedMinutes}分 / {lesson.steps.length}ステップ
+                            </p>
+                          </div>
+                          <svg className="w-4 h-4 text-text-secondary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
