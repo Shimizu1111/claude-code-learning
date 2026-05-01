@@ -506,6 +506,80 @@ export const courses: Course[] = [
         ],
       },
       {
+        id: "secret-protection",
+        title: "秘密情報を守る多重防御",
+        description:
+          "APIキーやパスワードなどの秘密情報を誤って公開してしまう事故は、実務で最も怖いセキュリティ事故の一つです。.gitignore、Claude Codeの権限設定、Gitフック、テンプレートファイルなど、複数の防御層を組み合わせて秘密情報を守る方法を実践します。",
+        category: "秘密情報の保護",
+        templateDir: "secret-protection",
+        estimatedMinutes: 20,
+        prerequisite: "Claude Codeの設定ファイルを理解する",
+        steps: [
+          {
+            id: "step-1",
+            title: ".gitignore で秘密ファイルを追跡除外する",
+            description:
+              "まず最初の防御層です。\n\n.env ファイルとは、APIキーやデータベースのパスワードなど「秘密の設定値」を書いておくファイルです。Cloudflareで使う .dev.vars も同じ役割です。\n\nこれらのファイルは絶対にGit（バージョン管理）に入れてはいけません。Gitに入ると、GitHubなどに公開されて全世界に秘密情報が漏れます。\n\n.gitignore に書いておけば「このファイルはGitで管理しない」と指定できます。まず秘密ファイルのサンプルと .gitignore を作りましょう。",
+            prompt:
+              "以下のファイルを作って：\n1. .env にダミーのAPIキーとDB接続情報を書いて（例：API_KEY=sk-dummy-1234）\n2. .dev.vars にダミーのCloudflare用シークレットを書いて\n3. .gitignore に .env, .env.*, .dev.vars を追加して",
+            afterNote:
+              "3つのファイルが作成されました。\n\n・.env → アプリ全般の秘密情報（APIキー、DB接続先など）\n・.dev.vars → Cloudflare Workers用の秘密情報\n・.gitignore → 「.env と .dev.vars はGitに入れないで」という宣言\n\n【.gitignore の書き方】\n・.env → .env という名前のファイルを除外\n・.env.* → .env.local, .env.production など .env で始まるファイルをすべて除外\n・.dev.vars → Cloudflare用の秘密ファイルを除外\n\nこれが第1の防御層です。しかし .gitignore だけでは不十分です。git add -f で強制的にステージングされると突破されてしまいます。次のステップでさらに防御を重ねましょう。",
+            why: ".gitignore は「秘密情報保護の第1層」です。しかし .gitignore だけでは完全ではありません。開発者が git add -f .env で強制追加したり、Claude Code が間違って読み取ってしまう可能性があります。そのため、複数の防御層を重ねる「多重防御（Defense in Depth）」が大切です。",
+            hint: ".env, .dev.vars, .gitignore が作成されます",
+            verification: { type: "file_exists", path: ".gitignore" },
+          },
+          {
+            id: "step-2",
+            title: "Claude Code の権限で秘密ファイルへのアクセスをブロック",
+            description:
+              "第2の防御層です。\n\nClaude Code は強力なので、指示次第で .env を読んでしまう可能性があります。たとえば「.env の内容を教えて」と聞いたら、中身を表示できてしまいます。\n\n.claude/settings.json の deny 設定で、Claude Code 自体が秘密ファイルを読み書きできないようにブロックしましょう。これにより、Claude Codeが誤って秘密情報を含む回答を生成するリスクを防げます。",
+            prompt:
+              ".claude/settings.json を作って。以下の permissions 設定を入れて：\n- deny に以下を追加：\n  - \"Read(.env)\" \n  - \"Read(.env.*)\" \n  - \"Read(.dev.vars)\" \n  - \"Edit(.env)\" \n  - \"Edit(.env.*)\" \n  - \"Edit(.dev.vars)\" \n  - \"Bash(cat .env*)\" \n  - \"Bash(cat .dev.vars)\"",
+            afterNote:
+              ".claude/settings.json が作成されました。\n\n設定の意味：\n・Read(.env) → Claude Codeが .env ファイルを読むことを禁止\n・Edit(.env) → Claude Codeが .env ファイルを編集することを禁止\n・Bash(cat .env*) → cat コマンドで .env を表示することを禁止\n\nこれにより、たとえ「.env の中身を見せて」と指示しても、Claude Codeは拒否します。\n\n【なぜこれが重要？】\nClaude Codeの会話内容はログに残る場合があります。秘密情報が会話に混入すると、ログ経由で漏洩するリスクがあります。Read/Edit 自体をブロックすることで、そもそも秘密情報がClaude Codeの目に触れないようにできます。",
+            why: "Claude Codeは指示があればファイルを読めてしまいます。deny設定で「そもそも読めなくする」のが第2の防御層です。.gitignore は「Gitに入れない」、deny は「Claude Code に見せない」。目的が違う2つの防御を重ねることで、安全性が大きく高まります。",
+            hint: ".claude/settings.json に deny ルールが設定されます",
+            verification: {
+              type: "file_contains",
+              path: ".claude/settings.json",
+              content: "deny",
+            },
+          },
+          {
+            id: "step-3",
+            title: "Git hookで秘密ファイルのコミットを阻止する",
+            description:
+              "第3の防御層です。\n\n.gitignore があっても、git add -f .env のように -f（force）オプションをつけると強制的にGitに追加できてしまいます。\n\nそこで Git hook（フック）を使います。これは「コミットしようとしたときに自動で実行されるチェックスクリプト」です。pre-commit フックを設定すると、コミット前に「秘密ファイルが含まれていないか」を自動でチェックして、含まれていたらコミットを拒否できます。",
+            prompt:
+              ".githooks/pre-commit を作って。以下の内容にして：\n- #!/bin/sh で始めて\n- git diff --cached --name-only でステージングされたファイル一覧を取得\n- .env, .env.*, .dev.vars がステージングされていたらエラーメッセージを出して exit 1 で中止\n- 実行権限もつけて\n- 最後に、「git config core.hooksPath .githooks で有効化してください」とコメントで書いて",
+            afterNote:
+              ".githooks/pre-commit が作成されました。\n\n【Git hook の仕組み】\npre-commit フックは、git commit を実行するたびに自動で実行されます。スクリプトが exit 1（異常終了）を返すと、コミットが中止されます。\n\n【有効化する方法】\nこのフックを有効にするには、以下のコマンドを一度実行する必要があります：\ngit config core.hooksPath .githooks\n\nこれにより、.githooks/ フォルダ内のスクリプトがGitフックとして認識されます。\n\n【テスト方法】\n試しに git add -f .env してから git commit してみてください。pre-commit フックがエラーを出してコミットが拒否されるはずです。\n\nこれで、-f で強制追加しても、コミット時点でブロックされます。",
+            why: "Git hook は「最後の砦」です。.gitignore を無視して git add -f された場合でも、コミット時に検出してブロックします。3つの防御層（.gitignore → Claude Code deny → Git hook）を組み合わせることで、秘密情報の漏洩リスクを限りなくゼロに近づけられます。",
+            hint: ".githooks/pre-commit が作成されます",
+            verification: {
+              type: "file_exists",
+              path: ".githooks/pre-commit",
+            },
+          },
+          {
+            id: "step-4",
+            title: ".env.example で安全にチーム共有する",
+            description:
+              "ここまでで「秘密ファイルを守る」仕組みが3層できました。でもチーム開発では「どんな環境変数が必要か」をメンバーに伝える必要がありますよね。\n\nそこで .env.example（テンプレートファイル）を作ります。実際の値は入れずに「こういう変数が必要ですよ」という情報だけを書いたファイルです。このファイルはGitにコミットしてOKです。\n\n新しいメンバーは .env.example をコピーして .env にリネームし、実際の値を自分で埋める、という流れです。",
+            prompt:
+              "以下のファイルを作って：\n1. .env.example に以下を書いて（値は空かダミーで）：\n   API_KEY=your-api-key-here\n   DATABASE_URL=postgresql://user:password@localhost:5432/mydb\n   OPENAI_API_KEY=sk-your-key-here\n   SECRET_KEY=generate-a-random-string\n2. .dev.vars.example にCloudflare用のテンプレートを書いて（値は空かダミー）\n\n各ファイルの先頭に「# このファイルをコピーして .env にリネームし、実際の値を入力してください」とコメントを入れて",
+            afterNote:
+              ".env.example と .dev.vars.example が作成されました。\n\n【チームでの運用フロー】\n1. .env.example はGitにコミットする（秘密の値が入っていないので安全）\n2. 新メンバーは cp .env.example .env でコピー\n3. .env に実際のAPIキーなどを記入\n4. .env は .gitignore で除外されているのでGitには入らない\n\nこれで「必要な環境変数の情報は共有」しつつ「実際の秘密の値は各自が管理」という安全な運用ができます。\n\n【ここまでのまとめ：多重防御の全体像】\n第1層：.gitignore → 秘密ファイルをGit追跡から除外\n第2層：settings.json deny → Claude Code から読み書きをブロック\n第3層：pre-commit hook → 強制追加されてもコミットを拒否\n第4層：.example テンプレート → 秘密の値なしで必要情報を共有\n\n一つの対策だけでは突破されるリスクがありますが、4つ重ねることで非常に堅牢になります。",
+            why: "セキュリティは「多重防御（Defense in Depth）」が基本です。一つの対策に頼るのではなく、複数の層で守ることで、どこか一つが突破されても他の層が防いでくれます。今回作った4つの防御層は、実際のプロダクション環境でもそのまま使えるベストプラクティスです。",
+            hint: ".env.example と .dev.vars.example が作成されます",
+            verification: {
+              type: "file_exists",
+              path: ".env.example",
+            },
+          },
+        ],
+      },
+      {
         id: "simplify-refactor",
         title: "/simplify でコード品質を改善",
         description:
