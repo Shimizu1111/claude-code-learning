@@ -37,13 +37,13 @@ export interface Course {
 }
 
 export const courses: Course[] = [
-  // ===== 初級 =====
+  // ===== 入門 =====
   {
     id: "beginner",
-    title: "初級",
-    subtitle: "Claude Codeの基本操作",
+    title: "入門",
+    subtitle: "まずはここから",
     description:
-      "Claude Codeのインストールから、自然言語での指示の出し方、ファイル操作の基本まで。プログラミング経験がなくてもOKです。",
+      "Claude Codeに話しかけてファイルを作る、既存ファイルを読んで直す、プロジェクトのルールを覚えさせるなど、最初に知っておくべき基本操作をひとつずつ体験します。",
     icon: "seedling",
     color: "green",
     lessons: [
@@ -114,10 +114,10 @@ export const courses: Course[] = [
       },
       {
         id: "init-and-memory",
-        title: "/init と CLAUDE.md を知ろう",
+        title: "プロジェクトのルールを覚えさせる",
         description:
-          "Claude Codeには「このプロジェクトではこういうルールで作業してね」と伝える仕組みがあります。それが CLAUDE.md というファイルです。一度設定すれば、次回以降は自動で覚えてくれます。",
-        category: "プロジェクト設定",
+          "Claude Codeには「このプロジェクトではこういうルールで作業してね」と伝える仕組みがあります。一度設定すれば、次回以降は自動で覚えてくれます。毎回同じ説明をしなくて済むようになります。",
+        category: "ルール設定",
         templateDir: "init-and-memory",
         estimatedMinutes: 10,
         prerequisite: "Claude Codeに指示を出してみよう",
@@ -159,7 +159,7 @@ export const courses: Course[] = [
         title: "既存ファイルを読んで編集させる",
         description:
           "すでにあるファイルをClaude Codeに読ませて、「ここだけ変えて」と指示する方法を学びます。ゼロから作るだけでなく、既存のものを理解・修正できるのがClaude Codeの強みです。",
-        category: "ファイル操作",
+        category: "ファイルの読み書き",
         templateDir: "read-and-edit",
         estimatedMinutes: 10,
         prerequisite: "Claude Codeに指示を出してみよう",
@@ -198,22 +198,22 @@ export const courses: Course[] = [
     ],
   },
 
-  // ===== 中級 =====
+  // ===== 実践 =====
   {
     id: "intermediate",
-    title: "中級",
-    subtitle: "Claude Codeの機能を活用する",
+    title: "実践",
+    subtitle: "実際に使ってみる",
     description:
-      "初級で基本操作を覚えたら、次はClaude Codeに備わっている便利な機能を使ってみましょう。スラッシュコマンド、計画モード、デバッグなど、作業効率を大きく上げる機能を体験します。",
+      "入門で基本を覚えたら、次は実際にアプリを作ったり、コードの間違いを直したり、バージョン管理を任せたり。Claude Codeで「仕事っぽいこと」を一通り体験します。",
     icon: "rocket",
     color: "yellow",
     lessons: [
       {
         id: "slash-commands",
-        title: "スラッシュコマンドを使いこなす",
+        title: "便利なショートカット機能を使う",
         description:
-          "Claude Codeには /（スラッシュ）で始まる便利なコマンドがたくさんあります。覚えておくと作業効率がグンと上がるコマンドを実際に使ってみましょう。",
-        category: "スラッシュコマンド",
+          "Claude Codeには /（スラッシュ）で始まる便利なショートカットがたくさんあります。「計画を立ててから実行」「変更点を一覧表示」「会話を整理」など、覚えておくと作業効率がグンと上がります。",
+        category: "ショートカット",
         templateDir: "slash-commands",
         estimatedMinutes: 15,
         steps: [
@@ -263,7 +263,7 @@ export const courses: Course[] = [
         title: "「まず作って、あとで直す」の実践",
         description:
           "Claude Codeの効率的な使い方は「まず大まかに作らせて、あとで細かく直していく」です。完璧な指示を考える必要はありません。会話しながら改善していくフローを体験しましょう。",
-        category: "実践フロー",
+        category: "アプリを作る",
         templateDir: "build-todo",
         estimatedMinutes: 15,
         prerequisite: "スラッシュコマンドを使いこなす",
@@ -302,10 +302,10 @@ export const courses: Course[] = [
       },
       {
         id: "fix-bugs",
-        title: "バグを見つけて直させる",
+        title: "コードの間違いを見つけて直してもらう",
         description:
-          "プログラムにはバグ（不具合）がつきものです。Claude Codeは「なんかおかしい」と伝えるだけでバグを発見し、修正してくれます。ここでは意図的にバグを仕込んだファイルを使って、その流れを体験します。",
-        category: "デバッグ",
+          "プログラムには間違い（バグ）がつきものです。Claude Codeは「なんかおかしい」と伝えるだけで間違いを発見し、修正してくれます。ここでは意図的に間違いを仕込んだファイルを使って、その流れを体験します。",
+        category: "間違い修正",
         templateDir: "fix-existing",
         estimatedMinutes: 10,
         steps: [
@@ -342,10 +342,10 @@ export const courses: Course[] = [
       },
       {
         id: "git-with-claude",
-        title: "Git操作をClaude Codeに任せる",
+        title: "ファイルの変更履歴を管理する",
         description:
-          "Git（ギット）はファイルの変更履歴を記録するツールです。「セーブポイント」のようなもので、いつでも過去の状態に戻れます。Gitのコマンドは複雑ですが、Claude Codeに任せれば自然言語で操作できます。",
-        category: "Git連携",
+          "Git（ギット）はファイルの変更履歴を記録するツールです。「セーブポイント」のようなもので、いつでも過去の状態に戻れます。Gitのコマンドは複雑ですが、Claude Codeに任せれば日本語で操作できます。",
+        category: "変更履歴の管理",
         templateDir: "git-with-claude",
         estimatedMinutes: 10,
         steps: [
@@ -379,37 +379,37 @@ export const courses: Course[] = [
       },
       {
         id: "claude-config-files",
-        title: "Claude Codeの設定ファイルを理解する",
+        title: "設定ファイルの使い分けをマスターする",
         description:
-          "Claude Codeには動作をカスタマイズするための設定ファイルがいくつかあります。CLAUDE.md、Rules、Skills、Agents、Settings など、種類と使い分けを実際に作りながら理解しましょう。",
-        category: "設定・カスタマイズ",
+          "Claude Codeには「ルールを書くファイル」がいくつもあって、最初は混乱しがちです。でも実は、それぞれ「いつ読み込まれるか」と「誰に共有されるか」が違うだけ。この2つの軸が分かれば迷いません。実際にファイルを作りながら、使い分けの感覚をつかみましょう。",
+        category: "カスタマイズ",
         templateDir: "claude-config",
         estimatedMinutes: 20,
         prerequisite: "/init と CLAUDE.md を知ろう",
         steps: [
           {
             id: "step-1",
-            title: "設定ファイルの全体像を知る",
+            title: "CLAUDE.md ＝ 毎回読まれる「社訓」",
             description:
-              "Claude Codeの設定ファイルにはいくつかの種類があり、それぞれ「いつ読み込まれるか」が違います。まず全体像を把握しましょう。\n\n【主な設定ファイルの種類】\n\n1. CLAUDE.md → 毎回必ず読み込まれる「基本ルール」\n2. .claude/rules/ → 特定のファイルを触るときだけ読み込まれる「条件付きルール」\n3. .claude/skills/ → /コマンド名 で呼び出す「再利用可能な手順書」\n4. .claude/agents/ → 専門タスクを任せる「専門家AI」\n5. .claude/settings.json → 権限やHooksなどの「システム設定」\n\nまずは CLAUDE.md を作って、プロジェクトの基本ルールを定義しましょう。",
+              "Claude Code の設定ファイルは、会社の書類にたとえると分かりやすいです。\n\n・CLAUDE.md → 「社訓」。出社したら（起動したら）必ず目に入る\n・Rules → 「部署マニュアル」。経理部の人は経理マニュアルだけ見る\n・Skills → 「業務手順書」。必要なときだけ棚から出して見る\n・settings.json → 「入退室カード」。誰に何の権限を与えるか\n\nまずは「社訓」にあたる CLAUDE.md を作りましょう。ここには、どんな作業でも毎回守ってほしいルールだけを書きます。\n\n【ポイント】CLAUDE.md は起動するたびに丸ごと読み込まれます。つまり、ここに書いた分だけ Claude Code の「記憶容量」を使います。公式の推奨は200行以下。書きすぎると応答が鈍くなるので、本当に毎回必要な情報だけに絞りましょう。",
             prompt:
               "CLAUDE.md を作って。以下の内容にして：\n- このプロジェクトはJavaScript製のWebアプリ\n- コメントは日本語で書く\n- インデントは2スペース\n- console.log でのデバッグは本番コードに残さない",
             afterNote:
-              "CLAUDE.md が作成されました。ファイルツリーでクリックして確認してみてください。\n\nこのファイルは Claude Code を起動するたびに自動で読み込まれます。つまり、ここに書いたルールは今後すべての作業で適用されます。\n\n【重要な注意点】\nCLAUDE.md に書く内容は「毎回必要な基本ルール」だけにしましょう。あれもこれもと書くと、Claude Code が読み込むテキスト量（コンテキスト）が増えて、応答品質が下がることがあります。\n\n「特定の作業のときだけ必要なルール」は、次のステップで学ぶ Rules に書くのが正解です。",
-            why: "CLAUDE.md はClaude Codeの「基本設定」です。毎回読まれるので、プロジェクト全体に適用したいルール（コード規約、言語設定など）だけを書きます。書きすぎるとコンテキストを圧迫するので、本当に毎回必要なものだけに絞るのがコツです。",
+              "CLAUDE.md が作成されました。ファイルツリーでクリックして中身を確認してみてください。\n\nこのファイルは Claude Code を起動するたびに自動で読み込まれます。ここに書いたルールは、今後このフォルダでの全ての作業に適用されます。\n\n【なぜ書きすぎてはダメなの？】\nClaude Code には「一度に覚えていられる量」に限りがあります（コンテキストウィンドウと呼びます）。CLAUDE.md の内容は毎回まるごとこの枠を使うので、ここが長いと肝心の作業に使える枠が減ってしまいます。\n\n「じゃあ、CSSのルールとかAPIのルールとかはどこに書けばいいの？」→ 次のステップで学ぶ Rules に書きます。",
+            why: "CLAUDE.md に書くべきなのは「どんな作業でも毎回必要なルール」だけです。コード規約や言語設定など、プロジェクト全体に関わることだけをここに書きましょう。「CSSの書き方」「テストの方針」など特定の場面でしか使わないルールは、ここではなく Rules に分けた方がClaude Codeの性能を最大限活かせます。",
             hint: "CLAUDE.md が作成されます",
             verification: { type: "file_exists", path: "CLAUDE.md" },
           },
           {
             id: "step-2",
-            title: "Rules で条件付きルールを作る",
+            title: "Rules ＝ 必要なときだけ自動で出てくる「部署マニュアル」",
             description:
-              "次は .claude/rules/ に「特定のファイルを触るときだけ読み込まれるルール」を作ります。\n\n【CLAUDE.md との違い】\n・CLAUDE.md → 毎回読まれる（全体ルール）\n・Rules → 指定したファイルを触るときだけ読まれる（部分ルール）\n\nたとえば「CSSファイルを編集するときだけ適用するデザインルール」を作ってみましょう。ファイル先頭の paths: で「どのファイルを触るときに読み込むか」を指定します。",
+              "CLAUDE.md に全部書くと「社訓が100ページ」みたいな状態になってしまいます。そこで使うのが Rules です。\n\nRules は .claude/rules/ フォルダに置くファイルで、2つの使い方があります：\n\n1. paths なし → CLAUDE.md と同じく毎回読まれる。CLAUDE.md が長くなったときのファイル分割用\n2. paths あり → 指定したファイルを触るときだけ読まれる。これが Rules の真価！\n\n今回は paths ありの方を試します。「CSSファイルを編集するときだけ適用されるデザインルール」を作ってみましょう。\n\n【ファイル先頭の paths: とは？】\nファイルの一番上に --- で囲んだ部分（フロントマターと呼びます）を書き、そこで「どのファイルを触ったとき読み込むか」を指定します。",
             prompt:
               ".claude/rules/css-guidelines.md を作って。先頭にフロントマター（---で囲む部分）を入れて paths: に \"**/*.css\" を指定して。本文には以下のルールを書いて：\n- BEM記法でクラス名を付ける\n- !important は禁止\n- カラーコードは変数化する\n- メディアクエリはモバイルファーストで書く",
             afterNote:
-              ".claude/rules/css-guidelines.md が作成されました。ファイルツリーで確認してみてください。\n\nファイルの先頭に以下のような部分があるはずです：\n---\npaths:\n  - \"**/*.css\"\n---\n\nこの paths: の部分が「いつこのルールを読み込むか」の条件です。\"**/*.css\" は「プロジェクト内のすべてのCSSファイル」を意味します。\n\nつまり、このルールは：\n・CSSファイルを編集するとき → 自動で読み込まれる\n・JavaScriptやHTMLを編集するとき → 読み込まれない\n\nこうすることで、必要なときだけルールが適用され、コンテキストの無駄遣いを防げます。\n\n【使い分けの目安】\n・毎回必要 → CLAUDE.md に書く\n・特定ファイル限定 → .claude/rules/ に書く",
-            why: "Rulesを使うと「CSSを触るときだけデザインルールを適用」「APIファイルを触るときだけセキュリティルールを適用」のように、状況に応じてルールを出し分けられます。CLAUDE.md に全部書くとコンテキストがパンクしますが、Rules なら必要なときだけ読み込まれるので効率的です。",
+              ".claude/rules/css-guidelines.md が作成されました。ファイルツリーで確認してみてください。\n\nファイルの先頭にこのような部分があるはずです：\n---\npaths:\n  - \"**/*.css\"\n---\n\nこれで、このルールは：\n・CSSファイルを編集するとき → 自動で読み込まれる\n・JavaScriptやHTMLを編集するとき → 読み込まれない（記憶容量を節約）\n\n【「自動で」がポイント】\nRules は条件が合えば勝手に読み込まれます。あなたが「CSSルールを読んで」と言う必要はありません。CSSファイルに触った瞬間、Claude Code が自動でこのマニュアルを参照します。\n\n【整理のコツ】\nRulesは1ファイル＝1トピックで作りましょう。ファイル名を見ただけで「何のルールか」分かるようにすると管理しやすくなります。\n例：css-guidelines.md、api-security.md、testing-rules.md",
+            why: "Rules を使うと、必要なルールが必要なタイミングで自動的に適用されます。「CSSを触るときだけデザインルール」「APIを触るときだけセキュリティルール」のように分けることで、Claude Code の記憶容量を無駄遣いせずに、たくさんのルールを管理できます。",
             hint: ".claude/rules/css-guidelines.md が paths 付きで作成されます",
             verification: {
               type: "file_exists",
@@ -418,14 +418,14 @@ export const courses: Course[] = [
           },
           {
             id: "step-3",
-            title: "Skills で再利用可能な手順を定義する",
+            title: "Skills ＝ 自分で棚から出す「業務手順書」",
             description:
-              "Skills（スキル）は「/コマンド名」で呼び出せる手順書です。\n\n【Rules との違い】\n・Rules → ファイルを触ると自動で読み込まれる（受動的）\n・Skills → /コマンド名 で自分から呼び出す（能動的）\n\nたとえば「新しいコンポーネントを作る手順」をスキルとして定義すれば、/new-component と打つだけで毎回同じ手順で作れます。\n\nコードレビュー用のスキルを作ってみましょう。",
+              "CLAUDE.md と Rules は、条件に合えば「勝手に読み込まれる」ものでした。\n\nSkills は違います。自分で「/コマンド名」と打って、能動的に呼び出すものです。\n\n【読み込みタイミングの比較】\n・CLAUDE.md → 起動したら毎回、全文が読まれる\n・Rules（paths あり）→ 対象ファイルを触ったら自動で全文が読まれる\n・Skills → 「説明文」だけは常にClaude Codeに見えている。「本文（手順の中身）」は呼び出したときだけ読まれる\n\nつまり Skills は「こんな手順書がありますよ」というタイトルだけ普段見せておいて、実際に使うときだけ中身を開く仕組みです。会社で言えば、棚に手順書のタイトルが貼ってあって、必要なときだけ引き出して読むイメージです。\n\nSkills が便利なのは「たまにしか使わないけど、使うときは毎回同じ手順でやりたい」作業です。たとえば：\n・/code-review → コードレビューのチェックリスト\n・/deploy → デプロイ（公開）の手順\n・/new-page → 新しいページのテンプレ作成\n\nコードレビュー用のスキルを作ってみましょう。",
             prompt:
               ".claude/skills/code-review/SKILL.md を作って。フロントマターに以下を設定：\n- description: 「コードレビューのチェックリストを実行する」\n- user-invocable: true\n\n本文には以下のチェック手順を書いて：\n1. 変更されたファイルを確認する\n2. セキュリティの問題がないかチェック\n3. パフォーマンスの問題がないかチェック\n4. コーディング規約に違反していないかチェック\n5. テストが書かれているかチェック\n6. 結果を一覧表にまとめて表示する",
             afterNote:
-              ".claude/skills/code-review/SKILL.md が作成されました。\n\nこれで、Claude Code のセッション中に /code-review と入力するだけで、このチェックリストが実行されます。\n\n【Skills のフロントマターの意味】\n・description: Claude Code がスキル一覧に表示する説明文。Claude が「このスキルを使うべきか」を判断するときにも使います\n・user-invocable: true → /code-review のように手動で呼び出せる。false にすると Claude が自動判断でのみ使う\n\n【他にも使えるフロントマター】\n・model: \"sonnet\" → このスキル実行時だけ別モデルを使う\n・allowed-tools: \"Read Grep\" → このスキルで使えるツールを制限（安全性向上）\n・paths: → 特定ファイルを触ったとき自動で実行\n\n/skills と入力すると、現在使えるスキルの一覧が表示されます。",
-            why: "スキルは「毎回同じ手順で実行したい作業」を定義するものです。たとえばコードレビュー、デプロイ手順、新規ファイル作成テンプレートなど。一度定義すれば /コマンド名 で即呼び出せるので、手順の漏れがなくなり、チーム全員が同じ品質で作業できます。",
+              ".claude/skills/code-review/SKILL.md が作成されました。\n\nこれで、Claude Code のセッション中に /code-review と入力するだけで、このチェックリストが実行されます。\n\n【フロントマターの意味】\n・description → スキル一覧に表示される説明文\n・user-invocable: true → /code-review で手動呼び出し可能。false にすると Claude が自動判断でのみ使う\n\n【CLAUDE.md に書くべきか、Skills にすべきか？】\n迷ったらこう考えてください：\n・「毎回の作業で自然に必要になる情報」→ CLAUDE.md\n  例：コード規約、プロジェクト構成、使用言語\n・「特定の作業をするときだけ必要な手順」→ Skills\n  例：レビュー手順、デプロイ手順、リリース作業\n\nCLAUDE.md は全文が毎回読み込まれますが、Skills は説明文だけが常時読まれ、本文は使うときだけ読まれます。CLAUDE.md に手順書まで全部書くと記憶容量がもったいないので、長い手順はSkillsに分けるのがコツです。",
+            why: "Skills は「必要なときだけ中身が読まれる手順書」です。説明文だけは常に見えていますが、本文は呼び出すまで記憶容量を使いません。一方 CLAUDE.md は全文が毎回読まれます。「常に必要な基本ルール」と「たまに使う手順」を分けることで、Claude Code の記憶容量を効率よく使えます。",
             hint: ".claude/skills/code-review/SKILL.md が作成されます",
             verification: {
               type: "file_exists",
@@ -434,14 +434,14 @@ export const courses: Course[] = [
           },
           {
             id: "step-4",
-            title: "ここまでの整理：いつ何を使う？",
+            title: "settings.json ＝ 権限を管理する「入退室カード」",
             description:
-              "ここまでで CLAUDE.md、Rules、Skills の3つを作りました。最後に settings.json も作って、全体の設定ファイルを完成させましょう。\n\n.claude/settings.json には、Claude Code の権限設定（どのコマンドを許可/禁止するか）や環境変数などを書けます。\n\n【全体の使い分けまとめ】\n・CLAUDE.md → 毎回読む基本ルール（コード規約等）\n・Rules → 特定ファイル限定のルール（CSS規約、API規約等）\n・Skills → 呼び出して使う手順書（/review, /deploy等）\n・Agents → 独立して動く専門家AI（上級で学びます）\n・Settings → 権限・Hooks等のシステム設定\n\n下のプロンプトで settings.json を作りましょう。",
+              "最後は settings.json です。これまでの3つは「Claude Code にどう振る舞ってほしいか」のルールでした。settings.json は「何を許可し、何を禁止するか」の権限設定です。\n\n【settings.json にできること】\n・コマンドの許可/禁止（例：npm は OK、rm -rf は NG）\n・環境変数の設定（例：開発モードか本番モードか）\n\n【置く場所で「誰に適用されるか」が変わる】\nsettings.json は3つの場所に置けます：\n\n1. ~/.claude/settings.json → 自分のPC全体に適用（どのプロジェクトでも有効）\n   例：「自分はいつも npm を許可したい」\n\n2. .claude/settings.json → このプロジェクトの全員に適用（Gitで共有）\n   例：「チーム全員に rm -rf を禁止したい」\n\n3. .claude/settings.local.json → このプロジェクトの自分だけに適用（Git共有しない）\n   例：「自分だけデバッグモードをONにしたい」\n\nチームで共有したいルールは 2 に、個人の好みは 1 か 3 に書きます。\nプロジェクト用の settings.json を作ってみましょう。",
             prompt:
               ".claude/settings.json を作って。以下の設定を入れて：\n- permissions の allow に \"Bash(npm *)\" と \"Bash(git *)\" を追加\n- permissions の deny に \"Bash(rm -rf *)\" を追加\n- env に NODE_ENV: \"development\" を設定",
             afterNote:
-              ".claude/settings.json が作成されました。\n\n設定内容の意味：\n・allow: [\"Bash(npm *)\", \"Bash(git *)\"] → npm と git のコマンドは許可確認なしで実行OK\n・deny: [\"Bash(rm -rf *)\"] → rm -rf（全削除）は絶対に実行しない\n・env: { NODE_ENV: \"development\" } → 環境変数を自動設定\n\n【ここまでに作ったファイル一覧】\nファイルツリーで確認してみてください：\n\n📄 CLAUDE.md → 基本ルール（毎回読まれる）\n📁 .claude/\n  📁 rules/\n    📄 css-guidelines.md → CSSファイル限定ルール\n  📁 skills/\n    📁 code-review/\n      📄 SKILL.md → /code-review で呼べる手順書\n  📄 settings.json → 権限・環境変数の設定\n\nこれが Claude Code のカスタマイズの基本構成です。プロジェクトの規模が大きくなっても、この構成を拡張していけばOKです。",
-            why: "Claude Code を「自分好みにカスタマイズする方法」を一通り体験しました。大事なのは使い分けです：\n\n・毎回必要？ → CLAUDE.md\n・特定ファイルだけ？ → Rules\n・手動で呼び出したい？ → Skills\n・自動で処理したい？ → Hooks（settings.json内）\n・専門タスクを委譲？ → Agents\n\nすべてをCLAUDE.mdに詰め込むとコンテキストがパンクします。適切に分散させるのがプロの使い方です。",
+              ".claude/settings.json が作成されました。ファイルツリーで確認してみてください。\n\n設定内容の意味：\n・allow: [\"Bash(npm *)\", \"Bash(git *)\"] → npm と git のコマンドは許可確認なしで実行OK\n・deny: [\"Bash(rm -rf *)\"] → rm -rf（フォルダの全削除）は絶対に実行しない\n・env: { NODE_ENV: \"development\" } → 環境変数（アプリに渡すメモ書き）を自動設定\n\n【ここまでに作った設定ファイルの全体像】\n\nCLAUDE.md → 毎回読まれる基本ルール（社訓）\n.claude/rules/css-guidelines.md → CSSを触るときだけ読まれるルール（部署マニュアル）\n.claude/skills/code-review/SKILL.md → /code-review で呼び出す手順書（業務手順書）\n.claude/settings.json → 権限と環境の設定（入退室カード）\n\n【迷ったときの判断チャート】\n「毎回必要？」→ はい → CLAUDE.md\n「毎回必要？」→ いいえ →「特定ファイルを触るとき必要？」→ はい → Rules\n「毎回必要？」→ いいえ →「特定ファイルを触るとき必要？」→ いいえ →「自分で呼び出して使う？」→ はい → Skills\n「権限や環境の設定？」→ はい → settings.json",
+            why: "Claude Code の設定ファイルの使い分けは「いつ読み込まれるか」と「誰に共有されるか」の2軸で考えるとスッキリします。\n\n・毎回自動 → CLAUDE.md（200行以下に抑える）\n・条件付き自動 → Rules（対象ファイルに応じて）\n・手動で呼ぶ → Skills（/コマンドで必要なときだけ）\n・権限管理 → settings.json（置く場所で共有範囲が変わる）\n\nすべてを CLAUDE.md に詰め込まず、適切に分散させるのが快適に使うコツです。",
             hint: ".claude/settings.json が作成されます",
             verification: {
               type: "file_exists",
@@ -456,19 +456,19 @@ export const courses: Course[] = [
   // ===== 上級 =====
   {
     id: "advanced",
-    title: "上級",
-    subtitle: "Claude Codeを使い倒す",
+    title: "応用",
+    subtitle: "もっと便利に使う",
     description:
-      "Hooks、サブエージェント、セキュリティレビューなど、Claude Codeの高度な機能を扱います。中級までの知識がある前提です。",
+      "セキュリティチェック、自動化設定、専門家AIなど、Claude Codeをさらに便利に使う方法を学びます。実践コースまでの知識がある前提です。",
     icon: "fire",
     color: "red",
     lessons: [
       {
         id: "security-review",
-        title: "/security-review でセキュリティチェック",
+        title: "コードの安全性をチェックする",
         description:
           "Claude Codeには /security-review というセキュリティ専用のコマンドがあります。コードの脆弱性（セキュリティ上の弱点）を自動で検出し、修正方法も提案してくれます。",
-        category: "セキュリティ",
+        category: "安全性チェック",
         templateDir: "security-check",
         estimatedMinutes: 15,
         prerequisite: "スラッシュコマンドを使いこなす",
@@ -510,7 +510,7 @@ export const courses: Course[] = [
         title: "秘密情報を守る多重防御",
         description:
           "APIキーやパスワードなどの秘密情報を誤って公開してしまう事故は、実務で最も怖いセキュリティ事故の一つです。.gitignore、Claude Codeの権限設定、Gitフック、テンプレートファイルなど、複数の防御層を組み合わせて秘密情報を守る方法を実践します。",
-        category: "秘密情報の保護",
+        category: "秘密情報を守る",
         templateDir: "secret-protection",
         estimatedMinutes: 20,
         prerequisite: "Claude Codeの設定ファイルを理解する",
@@ -530,14 +530,14 @@ export const courses: Course[] = [
           },
           {
             id: "step-2",
-            title: "Claude Code の権限で秘密ファイルへのアクセスをブロック",
+            title: "settings.json の deny で秘密ファイルへのアクセスをブロック",
             description:
-              "第2の防御層です。\n\nClaude Code は強力なので、指示次第で .env を読んでしまう可能性があります。たとえば「.env の内容を教えて」と聞いたら、中身を表示できてしまいます。\n\n.claude/settings.json の deny 設定で、Claude Code 自体が秘密ファイルを読み書きできないようにブロックしましょう。これにより、Claude Codeが誤って秘密情報を含む回答を生成するリスクを防げます。",
+              "第2の防御層です。\n\nClaude Code は強力なので、指示次第で .env を読んでしまう可能性があります。たとえば「.env の内容を教えて」と聞いたら、中身を表示できてしまいます。\n\n.claude/settings.json の deny 設定で、Claude Code 自体が秘密ファイルを読み書きできないようにブロックしましょう。\n\nポイントは、Read と Edit だけでなく Bash コマンド経由のアクセスも塞ぐことです。cat 以外にも head, tail, less, source など、ファイルの中身を表示できるコマンドはたくさんあります。抜け道を一つずつ塞いでいきます。",
             prompt:
-              ".claude/settings.json を作って。以下の permissions 設定を入れて：\n- deny に以下を追加：\n  - \"Read(.env)\" \n  - \"Read(.env.*)\" \n  - \"Read(.dev.vars)\" \n  - \"Edit(.env)\" \n  - \"Edit(.env.*)\" \n  - \"Edit(.dev.vars)\" \n  - \"Bash(cat .env*)\" \n  - \"Bash(cat .dev.vars)\"",
+              ".claude/settings.json を作って。以下の permissions 設定を入れて：\n- deny に以下を追加：\n  - \"Read(.env)\", \"Read(.env.*)\", \"Read(.dev.vars)\"\n  - \"Edit(.env)\", \"Edit(.env.*)\", \"Edit(.dev.vars)\"\n  - \"Read(credentials.json)\", \"Edit(credentials.json)\"\n  - \"Bash(*cat .env*)\", \"Bash(*cat .dev.vars*)\", \"Bash(*cat credentials.json*)\"\n  - \"Bash(*head .env*)\", \"Bash(*head .dev.vars*)\"\n  - \"Bash(*tail .env*)\", \"Bash(*tail .dev.vars*)\"\n  - \"Bash(*less .env*)\", \"Bash(*less .dev.vars*)\"\n  - \"Bash(*more .env*)\", \"Bash(*more .dev.vars*)\"\n  - \"Bash(*source .env*)\", \"Bash(*source .dev.vars*)\"\n  - \"Bash(*< .env*)\", \"Bash(*< .dev.vars*)\"\n  - \"Bash(printenv*)\"\n- allow に以下を追加（.example ファイルは読み書きOK）：\n  - \"Read(**/*.example)\", \"Edit(**/*.example)\"\n  - \"Read(**/*.example.*)\", \"Edit(**/*.example.*)\"",
             afterNote:
-              ".claude/settings.json が作成されました。\n\n設定の意味：\n・Read(.env) → Claude Codeが .env ファイルを読むことを禁止\n・Edit(.env) → Claude Codeが .env ファイルを編集することを禁止\n・Bash(cat .env*) → cat コマンドで .env を表示することを禁止\n\nこれにより、たとえ「.env の中身を見せて」と指示しても、Claude Codeは拒否します。\n\n【なぜこれが重要？】\nClaude Codeの会話内容はログに残る場合があります。秘密情報が会話に混入すると、ログ経由で漏洩するリスクがあります。Read/Edit 自体をブロックすることで、そもそも秘密情報がClaude Codeの目に触れないようにできます。",
-            why: "Claude Codeは指示があればファイルを読めてしまいます。deny設定で「そもそも読めなくする」のが第2の防御層です。.gitignore は「Gitに入れない」、deny は「Claude Code に見せない」。目的が違う2つの防御を重ねることで、安全性が大きく高まります。",
+              ".claude/settings.json が作成されました。\n\n【deny 設定の意味】\n・Read(.env) → Claude Codeの読み取りツールで .env を読むことを禁止\n・Edit(.env) → Claude Codeの編集ツールで .env を編集することを禁止\n・Bash(*cat .env*) → cat コマンドで .env を表示することを禁止（* は前後に何が付いても一致）\n・Bash(*head .env*), Bash(*tail .env*) ... → cat 以外の表示コマンドも全てブロック\n・Bash(*source .env*) → シェルに .env を読み込ませることを禁止\n・Bash(*< .env*) → リダイレクトで読み取ることを禁止\n・Bash(printenv*) → 環境変数の一覧表示を禁止\n\n【allow 設定の意味】\n・Read(**/*.example) → .env.example などテンプレートファイルは読み書きOK\nテンプレートには秘密の値が入っていないので、安全にアクセスできます。\n\n【なぜこれが重要？】\nClaude Codeの会話内容はログに残る場合があります。秘密情報が会話に混入すると、ログ経由で漏洩するリスクがあります。deny でそもそもアクセスできなくすることで、秘密情報がClaude Codeの目に触れない仕組みを作れます。\n\n【注意】deny はハードブロック（Claude Code が絶対に無視できない制限）です。これが settings.json で設定する最大のメリットです。",
+            why: "settings.json の deny は「ハードブロック」です。CLAUDE.md のルールは指示なので状況次第で破られる可能性がありますが、deny に設定したアクセスは Claude Code が物理的に実行できません。cat だけでなく head, tail, less, source, リダイレクトなど、ファイルを読み取れるコマンドを網羅的にブロックすることで、抜け道のない防御になります。",
             hint: ".claude/settings.json に deny ルールが設定されます",
             verification: {
               type: "file_contains",
@@ -547,6 +547,23 @@ export const courses: Course[] = [
           },
           {
             id: "step-3",
+            title: "CLAUDE.md にルールを書いて「意図」を伝える",
+            description:
+              "第3の防御層です。\n\nsettings.json の deny は強力ですが、すべてのパターンを網羅するのは難しいです。たとえば新しいコマンドや巧妙な書き方で読み取ろうとするケースまでは防ぎきれません。\n\nそこで CLAUDE.md（プロジェクトのルールファイル）に「秘密情報の扱い方」を明文化します。CLAUDE.md のルールは Claude Code が会話の最初に必ず読む指示書です。deny が「物理的にブロックする鍵」なら、CLAUDE.md は「やってはいけないことを理解させる教育」です。両方あることで防御が厚くなります。",
+            prompt:
+              "CLAUDE.md に以下の「秘密情報」セクションを追加して：\n\n## 秘密情報\n- 秘密情報は `.env` 等に書いてもらい、`.env.example` をテスト値入りで用意する\n- `.env*` `.dev.vars` `credentials.json` は deny 済み＆ `.gitignore` 必須（Read/Edit/Bash すべてハードブロック）\n- Bash経由でも読まない（cat, head, tail, less, more, source, リダイレクト等すべて禁止）\n- コードには環境変数参照で書く。ハードコード・ログ出力しない",
+            afterNote:
+              "CLAUDE.md に秘密情報のルールが追加されました。\n\n【settings.json と CLAUDE.md の役割の違い】\n・settings.json の deny → 「ハードブロック」。設定されたパターンは物理的に実行不可能\n・CLAUDE.md のルール → 「ソフトルール」。Claude Code が指示として理解し従う\n\n【なぜ両方必要？】\nsettings.json の deny は「Bash(*cat .env*)」のようにパターンを一つずつ指定します。しかし、ファイルを読む方法は無数にあり、すべてを deny で網羅するのは困難です。\n\nCLAUDE.md に「Bash経由でも読まない」と書いておけば、deny で漏れたパターン（たとえば新しいコマンド）も Claude Code が自主的に避けてくれます。\n\n逆に、CLAUDE.md だけでは「うっかり」や「指示の解釈ミス」で破られるリスクがあるので、主要なパターンは deny でハードブロックしておきます。\n\n【例え】\n・deny = 玄関の鍵（物理的に入れない）\n・CLAUDE.md = 「関係者以外立入禁止」の看板（理解して従う）\nどちらか一方だけより、両方あった方が安全です。",
+            why: "セキュリティは「ハードブロック（deny）」と「ルールによる理解（CLAUDE.md）」の組み合わせが最強です。deny は確実だけどパターン漏れの可能性があり、CLAUDE.md は柔軟だけど絶対ではない。お互いの弱点を補い合うことで、より堅牢な防御になります。",
+            hint: "CLAUDE.md に秘密情報セクションが追加されます",
+            verification: {
+              type: "file_contains",
+              path: "CLAUDE.md",
+              content: "秘密情報",
+            },
+          },
+          {
+            id: "step-4",
             title: "Git hookで秘密ファイルのコミットを阻止する",
             description:
               "第3の防御層です。\n\n.gitignore があっても、git add -f .env のように -f（force）オプションをつけると強制的にGitに追加できてしまいます。\n\nそこで Git hook（フック）を使います。これは「コミットしようとしたときに自動で実行されるチェックスクリプト」です。pre-commit フックを設定すると、コミット前に「秘密ファイルが含まれていないか」を自動でチェックして、含まれていたらコミットを拒否できます。",
@@ -562,29 +579,45 @@ export const courses: Course[] = [
             },
           },
           {
-            id: "step-4",
+            id: "step-5",
             title: ".env.example で安全にチーム共有する",
             description:
-              "ここまでで「秘密ファイルを守る」仕組みが3層できました。でもチーム開発では「どんな環境変数が必要か」をメンバーに伝える必要がありますよね。\n\nそこで .env.example（テンプレートファイル）を作ります。実際の値は入れずに「こういう変数が必要ですよ」という情報だけを書いたファイルです。このファイルはGitにコミットしてOKです。\n\n新しいメンバーは .env.example をコピーして .env にリネームし、実際の値を自分で埋める、という流れです。",
+              "ここまでで「秘密ファイルを守る」仕組みが4層できました。でもチーム開発では「どんな環境変数が必要か」をメンバーに伝える必要がありますよね。\n\nそこで .env.example（テンプレートファイル）を作ります。実際の値は入れずに「こういう変数が必要ですよ」という情報だけを書いたファイルです。このファイルはGitにコミットしてOKです。\n\n新しいメンバーは .env.example をコピーして .env にリネームし、実際の値を自分で埋める、という流れです。",
             prompt:
               "以下のファイルを作って：\n1. .env.example に以下を書いて（値は空かダミーで）：\n   API_KEY=your-api-key-here\n   DATABASE_URL=postgresql://user:password@localhost:5432/mydb\n   OPENAI_API_KEY=sk-your-key-here\n   SECRET_KEY=generate-a-random-string\n2. .dev.vars.example にCloudflare用のテンプレートを書いて（値は空かダミー）\n\n各ファイルの先頭に「# このファイルをコピーして .env にリネームし、実際の値を入力してください」とコメントを入れて",
             afterNote:
-              ".env.example と .dev.vars.example が作成されました。\n\n【チームでの運用フロー】\n1. .env.example はGitにコミットする（秘密の値が入っていないので安全）\n2. 新メンバーは cp .env.example .env でコピー\n3. .env に実際のAPIキーなどを記入\n4. .env は .gitignore で除外されているのでGitには入らない\n\nこれで「必要な環境変数の情報は共有」しつつ「実際の秘密の値は各自が管理」という安全な運用ができます。\n\n【ここまでのまとめ：多重防御の全体像】\n第1層：.gitignore → 秘密ファイルをGit追跡から除外\n第2層：settings.json deny → Claude Code から読み書きをブロック\n第3層：pre-commit hook → 強制追加されてもコミットを拒否\n第4層：.example テンプレート → 秘密の値なしで必要情報を共有\n\n一つの対策だけでは突破されるリスクがありますが、4つ重ねることで非常に堅牢になります。",
-            why: "セキュリティは「多重防御（Defense in Depth）」が基本です。一つの対策に頼るのではなく、複数の層で守ることで、どこか一つが突破されても他の層が防いでくれます。今回作った4つの防御層は、実際のプロダクション環境でもそのまま使えるベストプラクティスです。",
+              ".env.example と .dev.vars.example が作成されました。\n\n【チームでの運用フロー】\n1. .env.example はGitにコミットする（秘密の値が入っていないので安全）\n2. 新メンバーは cp .env.example .env でコピー\n3. .env に実際のAPIキーなどを記入\n4. .env は .gitignore で除外されているのでGitには入らない\n\nこれで「必要な環境変数の情報は共有」しつつ「実際の秘密の値は各自が管理」という安全な運用ができます。\n\n【ここまでのまとめ：多重防御の途中経過】\n第1層：.gitignore → 秘密ファイルをGit追跡から除外\n第2層：settings.json deny → Claude Code から読み書きをハードブロック\n第3層：CLAUDE.md ルール → deny で漏れたパターンも指示で防御\n第4層：pre-commit hook → 強制追加されてもコミットを拒否\n第5層：.example テンプレート → 秘密の値なしで必要情報を共有\n\nあと1つ、最も重要な防御層が残っています。",
+            why: "セキュリティは「多重防御（Defense in Depth）」が基本です。一つの対策に頼るのではなく、複数の層で守ることで、どこか一つが突破されても他の層が防いでくれます。.example テンプレートは「秘密の値を安全に共有する仕組み」として、多重防御の重要な一部です。",
             hint: ".env.example と .dev.vars.example が作成されます",
             verification: {
               type: "file_exists",
               path: ".env.example",
             },
           },
+          {
+            id: "step-6",
+            title: "環境変数をコードから安全に参照する",
+            description:
+              "防御の仕組みが整いました。最後に一番大事なことを実践します。\n\nコードの中にAPIキーやパスワードを直接書くこと（ハードコード）は絶対にNGです。たとえば以下のようなコードは危険です：\n\n```\nconst apiKey = \"sk-abc123-実際のキー\";\n```\n\nこれがGitHubに公開されると、世界中の誰でもあなたのAPIキーを使えてしまいます。実際に、GitHubにAPIキーを公開してしまい高額請求が来る事故は頻繁に起きています。\n\n代わりに .env に書いた値を「環境変数」として読み取る書き方をします。環境変数とは、アプリに外から渡すメモ書きのようなものです。",
+            prompt:
+              "app.js を作って。以下の内容にして：\n1. 最初に「悪い例」としてAPIキーをハードコードしたコードをコメントアウトで書いて\n2. 次に「良い例」として process.env.API_KEY で環境変数から読み取るコードを書いて\n3. 環境変数が設定されていない場合にエラーメッセージを出す処理も入れて\n4. 各行にコメントで「なぜこう書くのか」を説明して",
+            afterNote:
+              "app.js が作成されました。\n\n【悪い例と良い例の違い】\n・悪い例：const apiKey = \"sk-abc123\" → キーがコードに直接書かれている。GitHubに公開したら即漏洩\n・良い例：const apiKey = process.env.API_KEY → .env ファイルから読み取る。コードにはキーの値が一切含まれない\n\n【process.env とは？】\nNode.js で環境変数を読み取るための仕組みです。process.env.API_KEY と書くと、.env ファイルの API_KEY=xxx の xxx の部分が取得できます。\n\n【環境変数が未設定のときのチェック】\nif (!apiKey) で「環境変数が設定されていない」場合を検出してエラーにします。これにより、.env の設定忘れにすぐ気づけます。\n\n【多重防御の完成形】\n第1層：.gitignore → 秘密ファイルをGit追跡から除外\n第2層：settings.json deny → Claude Code から読み書きをハードブロック\n第3層：CLAUDE.md ルール → deny で漏れたパターンも指示で防御\n第4層：pre-commit hook → 強制追加されてもコミットを拒否\n第5層：.example テンプレート → 秘密の値なしで必要情報を共有\n第6層：環境変数参照 → コードに秘密の値を一切書かない\n\nこの6層すべてを組み合わせることで、秘密情報が漏洩する経路をほぼ完全に塞げます。",
+            why: "秘密情報の漏洩事故の多くは「コードにAPIキーを直接書いてしまった」ことが原因です。防御の仕組みをいくら作っても、コード自体にキーが書かれていたら意味がありません。環境変数で参照する書き方を習慣にすることが、秘密情報保護の最も基本的で最も重要なルールです。",
+            hint: "app.js に process.env を使った環境変数の参照コードが作成されます",
+            verification: {
+              type: "file_exists",
+              path: "app.js",
+            },
+          },
         ],
       },
       {
         id: "simplify-refactor",
-        title: "/simplify でコード品質を改善",
+        title: "コードを読みやすく整理してもらう",
         description:
           "/simplify は、Claude Codeがコードの品質を多角的にチェックして改善してくれるコマンドです。複数の観点（再利用性・効率・読みやすさ）で分析し、問題があれば自動で修正します。",
-        category: "コード改善",
+        category: "コード整理",
         templateDir: "refactoring",
         estimatedMinutes: 15,
         steps: [
@@ -622,10 +655,10 @@ export const courses: Course[] = [
       },
       {
         id: "hooks-setup",
-        title: "Hooksで作業を自動化する",
+        title: "「ファイル保存したら自動で○○」を設定する",
         description:
           "中級の「設定ファイルを理解する」で settings.json を学びましたね。Hooksはその settings.json の中に書く「自動処理ルール」です。「ファイルを編集したら自動でコード整形する」「危険なコマンドをブロックする」など、Claude Codeの動きを自動で制御できます。",
-        category: "Hooks",
+        category: "自動化設定",
         templateDir: "hooks-setup",
         estimatedMinutes: 15,
         prerequisite: "Claude Codeの設定ファイルを理解する",
@@ -667,10 +700,10 @@ export const courses: Course[] = [
       },
       {
         id: "subagents",
-        title: "サブエージェントを活用する",
+        title: "専門家AIを自分で作る",
         description:
           "中級の「設定ファイルを理解する」で .claude/agents/ を少し学びましたね。ここではもっと本格的に、ツール制限やモデル指定を使った実践的なエージェント定義を作ります。「専門家を呼び出す」感覚で、特定タスクに特化したAIを自分で設計できます。",
-        category: "サブエージェント",
+        category: "専門家AI",
         templateDir: "subagents",
         estimatedMinutes: 15,
         prerequisite: "Claude Codeの設定ファイルを理解する",
@@ -708,10 +741,10 @@ export const courses: Course[] = [
       },
       {
         id: "automation-scripts",
-        title: "自動化スクリプトを作らせる",
+        title: "面倒な繰り返し作業を自動化する",
         description:
           "繰り返しの作業を自動化するスクリプトをClaude Codeに作らせましょう。要件（何をしたいか）を伝えるだけで、実用レベルのスクリプトが出来上がります。シェルスクリプトを一から書ける必要はありません。",
-        category: "自動化",
+        category: "作業の自動化",
         templateDir: "shell-automation",
         estimatedMinutes: 10,
         steps: [
@@ -756,7 +789,7 @@ export const courses: Course[] = [
         title: "作ったものをインターネットに公開する",
         description:
           "今まではパソコンの中だけで動いていたサイトを、世界中の人がアクセスできるようにインターネット上に公開（デプロイ）します。公開に使える3つの無料サービスの違いを、実際に設定ファイルを作りながら理解しましょう。",
-        category: "デプロイ",
+        category: "インターネット公開",
         templateDir: "deploy-platforms",
         estimatedMinutes: 25,
         prerequisite: "「まず作って、あとで直す」の実践",
@@ -855,7 +888,7 @@ export const courses: Course[] = [
         title: "LPを一発で作る",
         description:
           "LP（ランディングページ）とは、商品やサービスを紹介する一枚もののWebページです。通常はデザイナーとエンジニアに依頼して何日もかかりますが、Claude Codeなら一つの指示で完成します。",
-        category: "即戦力",
+        category: "Webページ作成",
         templateDir: "quick-lp",
         estimatedMinutes: 5,
         steps: [
@@ -883,7 +916,7 @@ export const courses: Course[] = [
         title: "データをサクッと整理",
         description:
           "CSVファイル（Excelのような表形式のデータ）の集計・分析を、一つの指示でClaude Codeに任せます。手作業で集計する時間がゼロになります。",
-        category: "即戦力",
+        category: "データ整理",
         templateDir: "quick-data",
         estimatedMinutes: 5,
         steps: [
@@ -907,7 +940,7 @@ export const courses: Course[] = [
         title: "テンプレートを一括作成",
         description:
           "業務で使うメールテンプレートを、フォルダ構造ごと一括生成します。同じようなメールを何通も書く手間がなくなります。",
-        category: "即戦力",
+        category: "文書作成",
         templateDir: "quick-email",
         estimatedMinutes: 5,
         steps: [
