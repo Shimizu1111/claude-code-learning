@@ -261,11 +261,12 @@ export default function CourseSelect({
 }: {
   courses: Course[];
   onSelect: (courseId: string) => void;
-  onJumpToLesson: (courseId: string, lessonId: string) => void;
+  onJumpToLesson: (courseId: string, lessonId: string, stepIndex?: number) => void;
   completedCounts: Record<string, { done: number; total: number }>;
 }) {
   const [showGuide, setShowGuide] = useState(true);
   const [showAllLessons, setShowAllLessons] = useState(false);
+  const [expandedLesson, setExpandedLesson] = useState<string | null>(null);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-full py-12 px-6">
@@ -364,26 +365,65 @@ export default function CourseSelect({
                   <h3 className={`text-sm font-semibold mb-2 ${colors.text}`}>
                     {course.title} - {course.subtitle}
                   </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {course.lessons.map((lesson) => (
-                      <button
-                        key={lesson.id}
-                        onClick={() => onJumpToLesson(course.id, lesson.id)}
-                        className="text-left p-3 rounded-lg border border-border-main bg-bg-card hover:border-accent/50 transition-colors"
-                      >
-                        <div className="flex items-center justify-between gap-2">
-                          <div className="min-w-0">
-                            <p className="text-sm font-medium truncate">{lesson.title}</p>
-                            <p className="text-xs text-text-secondary mt-0.5">
-                              {lesson.category} / ~{lesson.estimatedMinutes}分 / {lesson.steps.length}ステップ
-                            </p>
+                  <div className="space-y-1">
+                    {course.lessons.map((lesson) => {
+                      const isExpanded = expandedLesson === lesson.id;
+                      return (
+                        <div key={lesson.id}>
+                          <div className="flex items-center gap-1">
+                            {/* Expand toggle */}
+                            <button
+                              onClick={() =>
+                                setExpandedLesson(isExpanded ? null : lesson.id)
+                              }
+                              className="p-1.5 rounded hover:bg-white/5 transition-colors shrink-0"
+                            >
+                              <svg
+                                className={`w-3.5 h-3.5 text-text-secondary transition-transform ${isExpanded ? "rotate-90" : ""}`}
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                              </svg>
+                            </button>
+                            {/* Lesson link */}
+                            <button
+                              onClick={() => onJumpToLesson(course.id, lesson.id)}
+                              className="flex-1 text-left p-2 rounded-lg hover:bg-white/5 transition-colors"
+                            >
+                              <div className="flex items-center justify-between gap-2">
+                                <p className="text-sm font-medium truncate">{lesson.title}</p>
+                                <p className="text-xs text-text-secondary shrink-0">
+                                  ~{lesson.estimatedMinutes}分 / {lesson.steps.length}ステップ
+                                </p>
+                              </div>
+                            </button>
                           </div>
-                          <svg className="w-4 h-4 text-text-secondary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
+                          {/* Step list */}
+                          {isExpanded && (
+                            <div className="ml-8 mb-2 space-y-0.5">
+                              {lesson.steps.map((step, stepIdx) => (
+                                <button
+                                  key={step.id}
+                                  onClick={() =>
+                                    onJumpToLesson(course.id, lesson.id, stepIdx)
+                                  }
+                                  className="w-full text-left flex items-center gap-2 px-3 py-1.5 rounded hover:bg-white/5 transition-colors group"
+                                >
+                                  <span className="w-5 h-5 rounded-full bg-bg-primary border border-border-main flex items-center justify-center text-[10px] text-text-secondary shrink-0 group-hover:border-accent/50">
+                                    {stepIdx + 1}
+                                  </span>
+                                  <span className="text-xs text-text-secondary group-hover:text-text-primary truncate">
+                                    {step.title}
+                                  </span>
+                                </button>
+                              ))}
+                            </div>
+                          )}
                         </div>
-                      </button>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               );

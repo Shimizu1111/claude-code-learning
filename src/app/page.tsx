@@ -100,10 +100,14 @@ export default function Home() {
     setActiveLessonId(null);
   };
 
-  const handleJumpToLesson = (courseId: string, lessonId: string) => {
+  const handleJumpToLesson = (
+    courseId: string,
+    lessonId: string,
+    stepIndex?: number
+  ) => {
     setActiveCourseId(courseId);
     setActiveLessonId(lessonId);
-    setCurrentStepIndex(0);
+    setCurrentStepIndex(stepIndex ?? 0);
     setPreviewFile(null);
     setFileTree([]);
     setVerifyFailed(false);
