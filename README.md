@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Claude Code Learning Platform
 
-## Getting Started
+Claude Codeの使い方を手を動かしながら学べるインタラクティブ学習プラットフォームです。
 
-First, run the development server:
+## セットアップ
 
 ```bash
+git clone https://github.com/Shimizu1111/claude-code-learning.git
+cd claude-code-learning
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ブラウザで http://localhost:3000 を開いてください。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 使い方
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. ブラウザでダッシュボードを開く
+2. コースを選ぶ（初級 / 中級 / 上級 / サクッと実践）
+3. レッスンを選ぶ
+4. **別のターミナル**で `cd workspace/{レッスン名}` に移動し、`claude` を起動
+5. ダッシュボードに表示されるプロンプトをコピーしてClaude Codeに貼り付ける
+6. ファイルの変更がダッシュボードにリアルタイムで反映される
+7. 「できたか確認する」ボタンで課題をクリア
 
-## Learn More
+何度でもリセットしてやり直せます。
 
-To learn more about Next.js, take a look at the following resources:
+## コース一覧
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| コース | 対象 | 内容 |
+|--------|------|------|
+| 初級 | 初めての人 | 自然言語での指示、CLAUDE.md、ファイル操作 |
+| 中級 | 基本を覚えた人 | スラッシュコマンド、アプリ構築、設定ファイルの使い分け |
+| 上級 | 使いこなしたい人 | セキュリティレビュー、Hooks、サブエージェント |
+| サクッと実践 | 忙しい人 | LP作成、データ整理、テンプレート一括生成（各5分） |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 必要なもの
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Node.js 20.9 以上
+- Claude Code（`npm install -g @anthropic-ai/claude-code`）
