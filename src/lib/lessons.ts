@@ -751,7 +751,6 @@ export const courses: Course[] = [
           },
         ],
       },
-    ],
       {
         id: "deploy-platforms",
         title: "作ったものをインターネットに公開する",
