@@ -752,6 +752,93 @@ export const courses: Course[] = [
         ],
       },
     ],
+      {
+        id: "deploy-platforms",
+        title: "作ったものをインターネットに公開する",
+        description:
+          "ローカルで作ったWebサイトやアプリを、実際にインターネット上に公開する方法を学びます。GitHub Pages、Cloudflare Pages、Vercel の3つのサービスの違いと使い分けを、実際にデプロイしながら理解します。",
+        category: "デプロイ",
+        templateDir: "deploy-platforms",
+        estimatedMinutes: 25,
+        prerequisite: "「まず作って、あとで直す」の実践",
+        steps: [
+          {
+            id: "step-1",
+            title: "まず公開するサイトを作る",
+            description:
+              "まず公開するためのシンプルなWebサイトを作りましょう。\n\nこのステップでは HTML と CSS だけで構成された静的サイト（サーバー側の処理がないサイト）を作ります。静的サイトは GitHub Pages、Cloudflare Pages、Vercel のどれでも公開できます。\n\n下のプロンプトで、ポートフォリオサイト（自己紹介サイト）を作りましょう。",
+            prompt:
+              "ポートフォリオサイトを作って。以下の構成で：\n- index.html：自己紹介、スキル一覧、実績のセクション\n- style.css：モダンなデザイン、ダークテーマ、レスポンシブ対応\n- 1ファイルにまとめずに index.html と style.css を分けて\n- 名前は「Taro Yamada」、職業は「Web Developer」にして",
+            afterNote:
+              "index.html と style.css が作成されました。ブラウザで index.html を開いて確認してみてください。\n\nこのサイトは「静的サイト」です。静的サイトとは：\n・HTML、CSS、JavaScript だけで構成\n・サーバー側の処理がない（データベースなし、ログイン機能なし）\n・ファイルをそのまま配信するだけで動く\n\nブログ、ポートフォリオ、LP、ドキュメントサイトなどが静的サイトの代表例です。\n\nこの「静的サイト」はこれから学ぶ3つのサービスすべてで無料ホスティングできます。",
+            why: "公開するコンテンツがないとデプロイの練習ができないので、まずシンプルなサイトを用意します。静的サイトは最もデプロイが簡単で、今回学ぶ3つのサービスすべてで無料で公開できます。",
+            hint: "index.html と style.css が作成されます",
+            verification: { type: "file_exists", path: "index.html" },
+          },
+          {
+            id: "step-2",
+            title: "3つのサービスの違いを理解する",
+            description:
+              "デプロイの前に、3つのサービスの違いを整理しましょう。Claude Codeに比較表を作ってもらいます。\n\n【3つのサービスの概要】\n\n・GitHub Pages：GitHubリポジトリから直接公開。最もシンプル。静的サイト専用。\n・Cloudflare Pages：高速CDN + Workers（サーバー処理）が使える。APIキーをサーバー側で安全に扱える。\n・Vercel：Next.js等のフレームワークと相性抜群。プレビュー環境が自動生成。\n\n下のプロンプトで、比較表をファイルとして生成しましょう。",
+            prompt:
+              "DEPLOY_GUIDE.md を作って。GitHub Pages、Cloudflare Pages、Vercel の比較表を書いて。以下の観点で比較：\n- 何に向いているか（ユースケース）\n- 料金（無料枠）\n- 対応サイトの種類（静的のみ？サーバーサイドもOK？）\n- カスタムドメイン対応\n- デプロイ方法（GitHubと連携？CLI？）\n- サーバーサイド処理（Functions/Workers/Serverless）\n- ビルドコマンドの設定\n- 環境変数の管理方法\n- それぞれの長所と短所\n\n表の後に「どれを選べばいい？」の判断フローチャートも書いて。初心者にも分かるように日本語で",
+            afterNote:
+              "DEPLOY_GUIDE.md が作成されました。ファイルツリーでクリックして確認してみてください。\n\n【選び方の目安】\n\n「HTML/CSSだけのシンプルなサイトを公開したい」\n→ GitHub Pages が最も簡単。GitHubにpushするだけ。\n\n「APIキーを使うアプリを安全にデプロイしたい」\n→ Cloudflare Pages + Workers。APIキーをサーバー側（環境変数）に置けるので、ブラウザに露出しない。\n\n「Next.jsやフレームワークを使ったアプリを公開したい」\n→ Vercel。ビルド設定が自動検出され、プレビュー環境も自動生成。\n\n「とにかく無料で速く公開したい」\n→ 3つとも無料枠あり。最も手軽なのは GitHub Pages。\n\n次のステップで、実際にGitHub Pagesにデプロイしてみましょう。",
+            why: "「どのサービスを使えばいいか」は初心者が最も迷うポイントです。用途に応じた選び方を知っておくと、プロジェクトに合った最適なサービスを選べます。3つとも無料枠があるので、迷ったら試してみるのが一番です。",
+            hint: "比較表と判断フローチャートが DEPLOY_GUIDE.md に生成されます",
+            verification: { type: "file_exists", path: "DEPLOY_GUIDE.md" },
+          },
+          {
+            id: "step-3",
+            title: "GitHub Pages にデプロイする",
+            description:
+              "最もシンプルな方法から始めましょう。GitHub Pages は GitHub リポジトリから直接Webサイトを公開できるサービスです。\n\n【仕組み】\n1. GitHubリポジトリにHTMLファイルをpush\n2. リポジトリの設定でGitHub Pagesを有効化\n3. https://ユーザー名.github.io/リポジトリ名/ でアクセス可能に\n\nClaude Codeを使って、GitHub Pagesのデプロイに必要な設定ファイルを作りましょう。GitHub Actions（GitHubの自動実行機能）を使った自動デプロイの設定です。",
+            prompt:
+              "GitHub Pages 用の GitHub Actions ワークフローを作って。以下の要件で：\n- .github/workflows/deploy-pages.yml に配置\n- main ブランチに push されたら自動デプロイ\n- プロジェクトルートの index.html と style.css をそのまま公開\n- permissions と pages の設定も含めて\n- 初心者向けにコメントを各ステップにつけて",
+            afterNote:
+              ".github/workflows/deploy-pages.yml が作成されました。\n\n【GitHub Pages のデプロイの流れ】\n1. このファイルをGitHubにpush\n2. リポジトリの Settings → Pages → Source を「GitHub Actions」に設定\n3. main ブランチにpushするたびに自動でサイトが更新される\n4. https://ユーザー名.github.io/リポジトリ名/ でアクセス\n\n【GitHub Pages の特徴】\n・完全無料（publicリポジトリ）\n・設定がシンプル（YAMLファイル1つ）\n・GitHubにpushするだけで自動更新\n・ただし静的サイトのみ（サーバー側の処理はできない）\n・APIキーなどの秘密情報をブラウザ側に置くことになるため、外部APIを使うアプリには不向き\n\n【向いているもの】ポートフォリオ、ブログ、ドキュメント、LP\n【向いていないもの】ログイン機能、データベース、APIキーが必要なアプリ",
+            why: "GitHub Pages は「最も手軽にWebサイトを公開する方法」です。GitHubにpushするだけで公開されるので、とにかく素早く公開したい場合に最適です。ただし静的サイト専用なので、サーバー側の処理が必要なアプリには向いていません。",
+            hint: ".github/workflows/deploy-pages.yml が作成されます",
+            verification: {
+              type: "file_exists",
+              path: ".github/workflows/deploy-pages.yml",
+            },
+          },
+          {
+            id: "step-4",
+            title: "Cloudflare Pages の設定を作る",
+            description:
+              "次に Cloudflare Pages の設定です。GitHub Pages との大きな違いは：\n\n1. Workers（サーバーサイド処理）が使える → APIキーを安全にサーバー側で扱える\n2. CDN（世界中に配置されたサーバー）で超高速配信\n3. 環境変数でAPIキーを管理 → ブラウザに露出しない\n\n特に「APIキーをブラウザに露出させたくない」場合、Cloudflare Pages + Workers が最適解です。\n\nCloudflare Pages用の設定とサンプルのWorker関数を作りましょう。",
+            prompt:
+              "以下のファイルを作って：\n1. wrangler.toml（Cloudflare Pages の設定ファイル）：\n   - name は my-portfolio\n   - compatibility_date は今日の日付\n   - pages_build_output_dir は \"./\" に設定\n   - 日本語コメントで各設定の意味を説明\n2. functions/api/hello.js（Cloudflare Workers の関数）：\n   - GETリクエストに { message: \"Hello from server!\" } を返す\n   - env.API_KEY で環境変数を参照する例をコメントで示す\n   - 「この関数はサーバー側で実行されるので、APIキーがブラウザに漏れません」とコメント",
+            afterNote:
+              "wrangler.toml と functions/api/hello.js が作成されました。\n\n【Cloudflare Pages のデプロイの流れ】\n1. Cloudflareアカウントを作成（無料）\n2. ダッシュボードで「Pages」→「Connect to Git」でGitHubリポジトリを接続\n3. pushするたびに自動デプロイ\n4. CLIの場合：npx wrangler pages deploy ./\n\n【Workers（サーバーサイド関数）の仕組み】\nfunctions/ フォルダに置いたJSファイルは、サーバー側で実行されます。\n例：functions/api/hello.js → https://サイト名/api/hello でアクセス可能\n\nAPIキーを env.API_KEY のように環境変数から参照すれば、ブラウザのソースコードには一切現れません。これがGitHub Pagesとの最大の違いです。\n\n【環境変数の設定方法】\nCloudflareダッシュボード → Settings → Environment Variables で設定\nまたは .dev.vars ファイルでローカル開発用に設定（.gitignoreで除外すること！）\n\n【向いているもの】APIキーを使うアプリ、高速配信が必要なサイト、Edge Computing\n【向いていないもの】特になし（ほぼ万能だが、設定が GitHub Pages より少し複雑）",
+            why: "Cloudflare Pages は「安全にAPIキーを扱いたい」場合の最適解です。Workers（サーバーサイド関数）を使えば、APIキーをサーバー側（環境変数）に置けるので、ブラウザのソースコードに露出しません。前のレッスン「秘密情報を守る多重防御」で学んだ知識の実践編です。",
+            hint: "wrangler.toml と functions/api/hello.js が作成されます",
+            verification: {
+              type: "file_exists",
+              path: "wrangler.toml",
+            },
+          },
+          {
+            id: "step-5",
+            title: "Vercel の設定を作る",
+            description:
+              "最後に Vercel の設定です。Vercelは Next.js の開発元が提供するサービスで、フレームワークとの相性が抜群です。\n\n【Vercel の特徴】\n・フレームワーク自動検出（Next.js, React, Vue 等）\n・プレビュー環境の自動生成（PRごとに独自URLでプレビューできる）\n・Serverless Functions（サーバーサイド処理）対応\n・ビルドコマンドの自動設定\n\n今回は静的サイトですが、Vercel用の設定ファイルとServerless Functionのサンプルを作りましょう。",
+            prompt:
+              "以下のファイルを作って：\n1. vercel.json（Vercel の設定ファイル）：\n   - 静的ファイルの配信設定\n   - 日本語コメントは JSON なので入れられないので、設定内容は最小限でOK\n2. api/hello.js（Vercel の Serverless Function）：\n   - GETリクエストに { message: \"Hello from Vercel!\" } を返す\n   - process.env.API_KEY で環境変数を参照する例をコメントで示す\n3. DEPLOY_COMPARISON.md を更新して、3つのサービスの「デプロイコマンド」と「環境変数の設定方法」のクイックリファレンスを末尾に追加して",
+            afterNote:
+              "vercel.json と api/hello.js が作成されました。\n\n【Vercel のデプロイの流れ】\n1. Vercelアカウントを作成（無料）\n2. GitHubリポジトリをインポート\n3. 自動でフレームワークを検出してビルド＆デプロイ\n4. CLIの場合：npx vercel\n\n【Vercel Serverless Functions の仕組み】\napi/ フォルダに置いたJSファイルがサーバーサイド関数になります。\n例：api/hello.js → https://サイト名/api/hello でアクセス可能\nCloudflare Workers と似た仕組みですが、ランタイムがNode.jsベースです。\n\n【3つのサービスの最終まとめ】\n\n静的サイトをすぐ公開したい → GitHub Pages\n　最もシンプル、pushするだけ、無料\n\nAPIキーを安全に使いたい → Cloudflare Pages\n　Workers でサーバー処理、環境変数、超高速CDN\n\nNext.jsアプリを公開したい → Vercel\n　フレームワーク自動検出、PRプレビュー、Serverless Functions\n\n迷ったら → Cloudflare Pages が最もバランスが良い\n　（静的サイトもサーバー処理もカバー、無料枠も十分）",
+            why: "GitHub Pages・Cloudflare Pages・Vercel の3つを実際に設定ファイルを作りながら比較しました。それぞれ得意分野が違うので、プロジェクトに合わせて選べるようになることが重要です。「静的ならGitHub Pages」「APIキー使うならCloudflare」「Next.jsならVercel」と覚えておけば、迷わず選べます。",
+            hint: "vercel.json と api/hello.js が作成されます",
+            verification: {
+              type: "file_exists",
+              path: "vercel.json",
+            },
+          },
+        ],
+      },
+    ],
   },
 
   // ===== サクッとコース =====
